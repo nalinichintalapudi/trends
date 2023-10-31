@@ -41,7 +41,6 @@ df_selection = df.query(
 
 # Sample data
 data = df_selection  # Assuming you have df_selection
-
 # Check if the dataframe is empty:
 if df_selection.empty:
     st.warning("No data available based on the current filter settings!")
@@ -50,23 +49,39 @@ if df_selection.empty:
 # Create a dynamic title based on the selected filters
 title = f"{Diagnosis}, {Age}, {Nationality}, {Rank}"
 st.markdown(f"<h3 style='balck: red;text-align: center'> {title}</h3>", unsafe_allow_html=True)
-# st.markdown(f"<h2 style='color: black;text-align: center'>Age: {Age}, {Nationality}, {Rank}</h2>", unsafe_allow_html=True)
 
-# Create a pivot table to count occurrences of each category per year
 pivot_table = data.pivot_table(index='Year', columns='Diagnosis', aggfunc='size', fill_value=0)
 
-# Create a trend graph with markers using Plotly
+# Create a trend graph with lines and custom hover text using Plotly
 fig = px.line(width=700, height=500)
 
-line_color='red'
+# Set the line color to red
+line_color = "red"
 
-# Add lines and markers for each category
+# Add lines for each category with custom hover text
+# Add lines for each category with custom hover text
 for column in pivot_table.columns:
-    fig.add_scatter(x=pivot_table.index, y=pivot_table[column], mode='lines+markers', name=column)
+    hover_text = [f" {column}: <b>{y}</b>" for y in pivot_table[column]]
+    fig.add_scatter(
+        x=pivot_table.index,
+        y=pivot_table[column],
+        mode='lines+markers',
+        name='',
+        line=dict(color='green'),
+        hovertemplate="%{text}",  # Show custom hover text
+        text=hover_text  # Custom hover text
+    )
 
-fig.update_xaxes(title='Year', dtick=1)
+# Customize background grid color
+background_grid_color = "light blue"
+fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor=background_grid_color)
+fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor=background_grid_color)
+
 fig.update_yaxes(title='Count', tickvals=list(range(int(pivot_table.max().max()) + 1)))
 fig.update_layout(legend_title_text='Diagnosis')
+
+# Set hover label font size
+fig.update_traces(hoverlabel_font_size=16, hoverlabel_font_color='red')
 
 # Create a Streamlit app
 st.plotly_chart(fig)
@@ -77,9 +92,14 @@ st.plotly_chart(fig)
 # ---- HIDE STREAMLIT STYLE ----
 hide_st_style = """
             <style>
-            #MainMenu {visibility: hidden;}
+            MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             header {visibility: hidden;}
+            primaryColor="#F63366"
+            backgroundColor="#FFFFFF"
+            secondaryBackgroundColor="#F0F2F6"
+            textColor="#262730"
+            font="sans serif"
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
