@@ -67,7 +67,7 @@ for column in pivot_table.columns:
         y=pivot_table[column],
         mode='lines+markers',
         name='',
-        line=dict(color='green'),
+        line=dict(color='line_color'),
         hovertemplate="%{text}",  # Show custom hover text
         text=hover_text  # Custom hover text
     )
@@ -81,11 +81,10 @@ fig.update_yaxes(title='Count', tickvals=list(range(int(pivot_table.max().max())
 fig.update_layout(legend_title_text='Diagnosis')
 
 # Set hover label font size
-fig.update_traces(hoverlabel_font_size=16, hoverlabel_font_color='red')
+fig.update_traces(hoverlabel_font_size=16, hoverlabel_font_color='green', hoverlabel_bgcolor='white')
 
 # Create a Streamlit app
-st.plotly_chart(fig, use_container_width=True)
-
+st.plotly_chart(fig)
 
 
 
