@@ -84,7 +84,7 @@ fig.update_layout(legend_title_text='Diagnosis')
 fig.update_traces(hoverlabel_font_size=16, hoverlabel_font_color='red')
 
 # Create a Streamlit app
-st.plotly_chart(fig)
+st.plotly_chart(fig, use_container_width=True)
 
 
 
@@ -95,11 +95,6 @@ hide_st_style = """
             MainMenu {visibility: hidden;}
             footer {visibility: hidden;}
             header {visibility: hidden;}
-            primaryColor="#F63366"
-            backgroundColor="#FFFFFF"
-            secondaryBackgroundColor="#F0F2F6"
-            textColor="#262730"
-            font="sans serif"
             </style>
             """
 st.markdown(hide_st_style, unsafe_allow_html=True)
