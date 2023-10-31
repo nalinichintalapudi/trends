@@ -67,7 +67,7 @@ for column in pivot_table.columns:
         y=pivot_table[column],
         mode='lines+markers',
         name='',
-        line=dict(color='line_color'),
+        line=dict(color='red'),
         hovertemplate="%{text}",  # Show custom hover text
         text=hover_text  # Custom hover text
     )
