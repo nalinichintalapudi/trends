@@ -5,7 +5,7 @@ import plotly.express as px
 @st.cache
 def get_data_from_excel():
     df = pd.read_excel(
-        io="OSEPIMARE_dataset_Trend.xlsx",
+        io="OSEPIMARE_dataset.xlsx",
         engine="openpyxl",
         sheet_name="Sheet1",
         usecols="A:F",
