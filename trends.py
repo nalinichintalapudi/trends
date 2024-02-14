@@ -9,7 +9,7 @@ def get_data_from_excel():
         engine="openpyxl",
         sheet_name="Sheet1",
         usecols="A:F",
-        nrows=2907,
+        nrows=3150,
     )
     return df
 
