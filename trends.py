@@ -24,12 +24,12 @@ with col1:
     Diagnosis = st.selectbox("Select a Diagnosis:", options=sorted(df["Diagnosis"].unique()), index=0, key='Diagnosis')
 
 with col2:
-    Age = st.selectbox("Select an Age:", options=sorted(df["Age"].unique()), index=2)
+    Age = st.selectbox("Select an Age:", options=sorted(df["Age"].unique()), index=0)
 
 col3, col4 = st.columns(2)
 
 with col3:
-    Nationality = st.selectbox("Select a Nationality:", options=sorted(df["Nationality"].unique()), index=2)
+    Nationality = st.selectbox("Select a Nationality:", options=sorted(df["Nationality"].unique()), index=4)
 
 with col4:
     Rank = st.selectbox("Select a Rank:", options=sorted(df["Rank"].unique()), index=2)
@@ -81,7 +81,7 @@ fig.update_yaxes(title='Count', tickvals=list(range(int(pivot_table.max().max())
 fig.update_layout(legend_title_text='Diagnosis')
 
 # Set hover label font size
-fig.update_traces(hoverlabel_font_size=16, hoverlabel_font_color='green', hoverlabel_bgcolor='white')
+fig.update_traces(hoverlabel_font_size=10, hoverlabel_font_color='white', hoverlabel_bgcolor='black')
 
 # Create a Streamlit app
 st.plotly_chart(fig)
